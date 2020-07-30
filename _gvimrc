@@ -1,0 +1,99 @@
+set nocompatible        " be iMproved, required/enter 2000
+syntax enable       "Basic highlighting for lot of languages
+filetype plugin on
+filetype indent on      " load filetype-specific indent files
+
+set noerrorbells	"This is not working for some reason
+set belloff=all		"But this is working
+set number              "show line numbers
+set relativenumber
+set guifont=Consolas:h12
+
+"set guitablabel=\[%N\]\ %t\ %M " show filename rather than full path "help 'statusline'
+set guitablabel=\[%N\]\ %t\ %M " show filename rather than full path "help 'statusline'
+"set autochdir       "To change pwd for each tab
+autocmd BufEnter * silent! lcd %:p:h
+set wildmenu            " visual autocomplete for command menu
+set showcmd             "show command in bottom bar
+set cursorline          "highlight cursor line
+set lazyredraw          " redraw only when we need to.
+set showmatch           " highlight matching [{()}]
+set incsearch           " search as characters are entered
+set hlsearch            " highlight matches
+
+set tabstop=4 	        "	
+set softtabstop=4	    "4 spaces width
+set shiftwidth=4	    "Shift ->
+set expandtab		    "convert tabs to spaces
+set smarttab
+set smartindent
+set nowrap              "If line wider than window don't make it multi line
+set smartcase           "case sensitive searching
+
+"set noswapfile      "no vim   .swp files
+"set noundofile
+set nobackup
+set nowritebackup
+set undodir=E:/vim_backups/
+set undofile
+
+set foldenable          " enable folding
+set foldlevelstart=10   " open most folds by default
+set foldnestmax=10      " 10 nested fold max
+set foldmethod=indent   " fold based on indent level
+
+"split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+set colorcolumn=80      "To prevent file from getting too wide
+highlight ColorColumn ctermbg=0 guibg=lightgrey
+
+" turn off search highlight
+"nnoremap <leader><space> :nohlsearch<CR>
+
+"let g:airline_theme='onehalfdark'
+
+cd E:/Codes2020/
+call plug#begin('~/.vim/plugged')
+   " On-demand loading
+   Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+   Plug 'sjl/badwolf'
+   Plug 'sonph/onehalf'
+   "Plug 'tomasiser/vim-code-dark'
+   Plug 'joshdick/onedark.vim'
+   "Plug 'vim-airline/vim-airline'
+   Plug 'itchyny/lightline.vim'
+   Plug 'ajh17/spacegray.vim'
+   Plug 'gosukiwi/vim-atom-dark'
+   Plug 'sheerun/vim-polyglot'
+
+call plug#end()
+
+colorscheme onehalfdark     " a good color scheme
+set background=dark
+syntax on
+if !has('gui_running')
+  set t_Co=256
+endif
+"let g:lightline.colorscheme='onehalfdark'
+
+" CtrlP settings
+let g:ctrlp_match_window = 'bottom,order:ttb'
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+
+map <C-o> :NERDTreeToggle<CR>
+"let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+
+" FINDING FILES":
+"set path+=**            "search recursively through subdirectories
+" TAG JUMPING":
+"brew ctags
+
+
+"source %   to source the current file
+
