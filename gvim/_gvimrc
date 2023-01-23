@@ -1,0 +1,168 @@
+"this file works directly on any unix system without any need for plugins
+"Dec 13 2022
+"this file should be placed in "~/" with the name _gvimrc
+
+"https://opensource.com/article/20/2/how-install-vim-plugins
+
+"May28 edits
+"set path+=**
+"
+"colorscheme torte       "default colorscheme
+
+set nocompatible        " be iMproved, required/enter 2000
+syntax enable       "Basic highlighting for lot of languages
+filetype plugin on
+filetype indent on      " load filetype-specific indent files
+
+set noerrorbells	"This is not working for some reason
+set belloff=all		"But this is working
+set number              "show line numbers
+set relativenumber
+
+set guifont=Monospace\ 13
+set guifont=Inconsolata\ 14
+if has("gui_running")
+  if has("gui_gtk2")
+    set guifont=Inconsolata\ 14
+    "set guifont=Inconsolata\ 12
+  elseif has("gui_macvim")
+    set guifont=Menlo\ Regular:h14
+  elseif has("gui_win32")
+    set guifont=Consolas:h11:cANSI
+  endif
+endif
+set guifont=Inconsolata\ 23
+
+
+"set guitablabel=\[%N\]\ %t\ %M " show filename rather than full path "help 'statusline'
+set guitablabel=\[%N\]\ %t\ %M " show filename rather than full path "help 'statusline'
+"set autochdir       "To change pwd for each tab
+autocmd BufEnter * silent! lcd %:p:h
+set wildmenu            " visual autocomplete for command menu
+set showcmd             "show command in bottom bar
+set cursorline          "highlight cursor line
+set lazyredraw          " redraw only when we need to.
+set showmatch           " highlight matching [{()}]
+set incsearch           " search as characters are entered
+set hlsearch            " highlight matches
+
+set tabstop=4 	        "	
+set softtabstop=4	    "4 spaces width
+set shiftwidth=4	    "Shift ->
+set expandtab		    "convert tabs to spaces
+set smarttab
+set smartindent
+set nowrap              "If line wider than window don't make it multi line
+set smartcase           "case sensitive searching
+
+"set noswapfile      "no vim   .swp files
+"set noundofile
+set nobackup
+set nowritebackup
+"set undodir=E:/vim_backups/
+"set undofile
+
+set foldenable          " enable folding
+set foldlevelstart=10   " open most folds by default
+set foldnestmax=10      " 10 nested fold max
+set foldmethod=indent   " fold based on indent level
+
+"split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+set colorcolumn=80      "To prevent file from getting too wide
+highlight ColorColumn ctermbg=0 guibg=lightgrey
+
+"colorscheme onehalfdark     " a good color scheme
+"colorscheme seoul256
+"colorscheme gruvbox
+
+set background=dark "set bg=dark
+
+"default vertical split to right
+set splitright
+
+" turn off search highlight
+"nnoremap <leader><space> :nohlsearch<CR>
+
+"let g:airline_theme='onehalfdark'
+
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'joshdick/onedark.vim'
+"Plugin 'ycm-core/YouCompleteMe'
+
+Plugin 'http://github.com/tpope/vim-surround' " Surrounding ysw)
+Plugin 'https://github.com/preservim/nerdtree' " NerdTree
+Plugin 'https://github.com/tpope/vim-commentary' " For Commenting gcc & gc
+Plugin 'https://github.com/vim-airline/vim-airline' " Status bar
+"Plugin 'https://github.com/lifepillar/pgsql.vim' " PSQL Pluging needs :SQLSetType pgsql.vim
+Plugin 'https://github.com/ap/vim-css-color' " CSS Color Preview
+Plugin 'https://github.com/rafi/awesome-vim-colorschemes' " Retro Scheme
+"Plugin 'https://github.com/neoclide/coc.nvim'  " Auto Completion
+"Hard to install, has other dependencies
+Plugin 'https://github.com/ryanoasis/vim-devicons' " Developer Icons
+Plugin 'https://github.com/tc50cal/vim-terminal' " Vim Terminal
+Plugin 'https://github.com/preservim/tagbar' " Tagbar for code navigation
+"Tag bar needs exuberant ctag
+Plugin 'https://github.com/terryma/vim-multiple-cursors' " CTRL + N for multiple cursors
+Plugin 'tribela/vim-transparent'
+"Plugin 'https://github.com/xiyaowong/nvim-transparent'
+"Plugin 'https://github.com/vim/vim/blob/master/runtime/syntax/specman.vim'
+
+call vundle#end()            " required
+
+colorscheme onedark
+
+
+"
+"Syntax on
+"If !has('gui_running')
+"  set t_Co=256
+"Endif
+""let g:lightline.colorscheme='onehalfdark'
+"
+"" CtrlP settings
+"Let g:ctrlp_match_window = 'bottom,order:ttb'
+"Let g:ctrlp_switch_buffer = 0
+"Let g:ctrlp_working_path_mode = 0
+"Let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+"
+"Map <C-o> :NERDTreeToggle<CR>
+""let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+"
+"" FINDING FILES":
+""set path+=**            "search recursively through subdirectories
+"" TAG JUMPING":
+""brew ctags
+"
+"
+""source %   to source the current file
+
+set encoding=UTF-8
+
+
+nnoremap <C-f> :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+
+nmap <F8> :TagbarToggle<CR>
+
+:set completeopt-=preview " For No Previews
+
+":colorscheme jellybeans
+
+let g:NERDTreeDirArrowExpandable="+"
+let g:NERDTreeDirArrowCollapsible="~"
+
+let g:transarent_enabled = v:false "Disable transparent neovim background by default
